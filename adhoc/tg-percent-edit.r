@@ -22,6 +22,21 @@ tg_df$date <- excel_numeric_to_date(tg_df$date)
       y = "Ball Edit %") +
     theme_classic()
 
+# average ball edit percent - week
+  tg_df %>%
+    mutate(week = week(date)) %>%
+    group_by(week) %>%
+    summarise(avg_edit_percent = mean(percent_edit)) %>%
+    ggplot(aes(x = week, y = avg_edit_percent, fill = avg_edit_percent)) +
+    geom_col() +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 0.01)) +
+    scale_fill_gradient(low = "green", high = "red") +
+    labs(title = "Weekly Average: Ball Edit %",
+         x = "Week Number",
+         y = "") +
+    theme_classic() +
+    theme(legend.position = "none")
+
 # average ball edit percent - month
   tg_df %>%
     mutate(month = month(date, label = TRUE, abbr = TRUE)) %>%
@@ -30,9 +45,9 @@ tg_df$date <- excel_numeric_to_date(tg_df$date)
     ggplot(aes(x = month, y = avg_edit_percent, fill = avg_edit_percent)) +
     geom_col() +
     scale_y_continuous(labels = scales::percent_format(accuracy = 0.01)) +
+    scale_fill_gradient(low = "green", high = "red") +
     labs(title = "Monthly Average: Ball Edit %",
          x = "",
          y = "") +
     theme_classic() +
     theme(legend.position = "none")
-  
