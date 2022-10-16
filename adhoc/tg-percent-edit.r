@@ -6,7 +6,7 @@ library(readxl)
 library(scales)
 
 # load data
-tg_df <- read_excel("tg-data.xlsx", "tg-data") %>%
+tg_df <- read_excel("C:/Users/Bradf/OneDrive/Desktop/tg-data.xlsx", "tg-data") %>%
   clean_names()
 
 tg_df$date <- excel_numeric_to_date(tg_df$date)
@@ -35,3 +35,4 @@ tg_df$date <- excel_numeric_to_date(tg_df$date)
          y = "") +
     theme_classic() +
     theme(legend.position = "none")
+  
